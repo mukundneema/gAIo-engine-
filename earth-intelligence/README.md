@@ -4,8 +4,14 @@ Chat with Gemini about how places have changed. Gemini calls a Python function t
 real **Sentinel-2** imagery and **Dynamic World V1** land-cover from Google Earth Engine, and
 the React UI shows the satellite composites, land-cover maps and area statistics.
 
-Forecasting is intentionally **not** implemented yet: the model is told to refuse to invent
-future imagery. The next step is to build and validate a real model on this historical data.
+**No AI key needed.** If `GEMINI_API_KEY` is not set, the app reads requests like
+"Mumbai 2016, 2020, 2025" or "Las Vegas 2018-2025 within 20 km" with a simple parser and writes
+the summary from the real numbers. Set `GEMINI_API_KEY` later and it switches to Gemini
+function calling automatically (`/api/health` shows `chat_mode`).
+
+Forecasting is intentionally **not** implemented yet: asking about future years gets a polite
+refusal, never invented imagery. The next step is to build and validate a real model on this
+historical data.
 
 ```
 frontend/   React + TypeScript (Vite)       -> static site on Vercel
@@ -58,8 +64,8 @@ curl -X POST localhost:8000/api/imagery -H 'content-type: application/json' \
 
 | Variable | Value |
 |---|---|
-| `GEMINI_API_KEY` | your Gemini key |
-| `GEMINI_MODEL` | e.g. `gemini-2.5-flash` |
+| `GEMINI_API_KEY` | *optional* - leave out to run without AI |
+| `GEMINI_MODEL` | *optional* - e.g. `gemini-2.5-flash` |
 | `EARTHENGINE_PROJECT` | Google Cloud project ID |
 | `EARTHENGINE_SERVICE_ACCOUNT` | service account email |
 | `EARTHENGINE_PRIVATE_KEY` | the full JSON key (one line) or just its `private_key` |

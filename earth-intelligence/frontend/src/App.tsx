@@ -56,7 +56,7 @@ export default function App() {
       <main className="thread">
         {messages.length === 0 && (
           <div className="empty">
-            <p>Ask about any place and the years you want to compare.</p>
+            <p>Name a place and the years you want to compare (2016 onward).</p>
             <div className="chips">
               {EXAMPLES.map((ex) => (
                 <button key={ex} onClick={() => void submit(ex)}>
